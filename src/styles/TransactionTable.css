@@ -1,0 +1,31 @@
+.transaction-table-container {
+    margin: 20px;
+  }
+  
+  .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .transaction-table th, .transaction-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .transaction-table th {
+    background-color: #f1f1f1;
+  }
+  
+  .transaction-table tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .transaction-table .approved {
+    color: green;
+  }
+  
+  .transaction-table .failed {
+    color: red;
+  }

@@ -1,0 +1,39 @@
+.landing-container {
+    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center-button {
+    padding: 1rem 2rem;
+    background-color: #8B4513;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .center-button:hover {
+    background-color: #5C4033;
+  }
+  
+  .bank-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: #5C4033;
+    font-size: 1rem;
+    border: 2px solid #8B4513;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .bank-button:hover {
+    background-color: #f4e2d8;
+  }
