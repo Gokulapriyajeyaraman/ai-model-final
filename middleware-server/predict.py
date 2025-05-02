@@ -10,18 +10,21 @@ def predict():
     data = request.json
 
     # Process input
-    cvvToken = hash(data['cvv']) % 1000000  # Fixed from 'cvvToken'
+    cvvToken = hash(data['cvv']) % 1000000
     expiry_month = int(data['expiry'].split('/')[0])
     expiry_year = int(data['expiry'].split('/')[1])
-    amount = float(data['amount'])  # Removed scaling
+    amount = float(data['amount'])
 
     transaction = np.array([[expiry_month, expiry_year, cvvToken, amount]])
     transaction = transaction.reshape(transaction.shape[0], transaction.shape[1], 1)
 
     prediction = model.predict(transaction)
 
+    # 🔍 Debug print to see model output
+    print("🔍 Model raw prediction:", prediction[0][0])
+
     return jsonify({'isFraud': bool(prediction[0][0] > 0.5)})
 
 if __name__ == '__main__':
-     app.run(debug=True, port=5001)
+    app.run(debug=True, port=5001)
 
