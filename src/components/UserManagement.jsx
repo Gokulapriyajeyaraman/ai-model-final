@@ -14,8 +14,12 @@ export default function UserManagement() {
   const [showModal, setShowModal] = useState(false);
 
   const fetchUsers = async () => {
-    const response = await axios.get("http://localhost:6001/users");
-    setUsers(response.data);
+    try {
+      const response = await axios.get("http://localhost:5000/get-users");
+      setUsers(response.data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
   };
 
   useEffect(() => {
@@ -28,7 +32,7 @@ export default function UserManagement() {
 
   const handleAddUser = async () => {
     try {
-      await axios.post("http://localhost:6001/add-user", formData);
+      await axios.post("http://localhost:5000/add-user", formData);
       setFormData({
         name: "",
         accountNumber: "",
@@ -46,8 +50,10 @@ export default function UserManagement() {
 
   return (
     <div>
-      <h2 >User Management</h2>
-      <button style={{backgroundColor :"#8B4513"}} onClick={() => setShowModal(true)}>Add User</button>
+      <h2>User Management</h2>
+      <button style={{ backgroundColor: "#8B4513" }} onClick={() => setShowModal(true)}>
+        Add User
+      </button>
 
       <table className="transaction-table">
         <thead>
@@ -69,19 +75,28 @@ export default function UserManagement() {
       </table>
 
       {showModal && (
-        <div style={{
-          position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center"
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.5)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           <div style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>
-            <h3 style={{color: "#5C4033"}}>Add New User</h3>
+            <h3 style={{ color: "#5C4033" }}>Add New User</h3>
             <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} /><br />
             <input name="accountNumber" placeholder="Account Number" value={formData.accountNumber} onChange={handleChange} /><br />
             <input name="cardNumber" placeholder="Card Number" value={formData.cardNumber} onChange={handleChange} /><br />
             <input name="expiry" placeholder="Expiry (MM/YY)" value={formData.expiry} onChange={handleChange} /><br />
             <input name="cvv" placeholder="CVV" value={formData.cvv} onChange={handleChange} /><br />
             <input name="balance" placeholder="Balance" value={formData.balance} onChange={handleChange} /><br /><br />
-            <button onClick={handleAddUser} style={{margin: "10px"}}>Submit</button>
+            <button onClick={handleAddUser} style={{ margin: "10px" }}>Submit</button>
             <button onClick={() => setShowModal(false)}>Cancel</button>
           </div>
         </div>
